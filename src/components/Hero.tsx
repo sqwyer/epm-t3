@@ -12,8 +12,8 @@ export default function Hero({ session }: any) {
 					.
 				</h1>
 				<p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-					We&apos;re creating solutions that enable students to be more
-					effective in EAST.
+					We&apos;re creating solutions that enable students to be
+					more effective in EAST.
 				</p>
 				<div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
 					<a
