@@ -1,0 +1,46 @@
+@use "common" as *;
+@use "button.module" as btn;
+
+.Nav {
+	display: grid;
+	padding: 0.7rem 0;
+	font-size: 100%;
+	grid-template-columns: minmax(max-content, 1fr) auto minmax(
+			max-content,
+			1fr
+		);
+
+	font-weight: 600;
+	border-bottom: 2px solid $light-border;
+	align-items: center;
+	align-content: center;
+
+	a {
+		color: #000;
+		text-decoration: none;
+	}
+
+	& > .center + *:last-child,
+	& > .right {
+		justify-content: right;
+		float: right;
+	}
+
+	& > ul.links {
+		list-style: none;
+		display: flex;
+		flex-direction: row;
+	}
+
+	& > ul.links > li > a:not(.primary):hover,
+	.link:not(.primary):hover {
+		background-color: $light-border;
+	}
+
+	.link {
+		@include btn.button;
+		background-color: #fff;
+		padding: 0.33rem 0.89rem;
+		block-size: 2.6rem;
+	}
+}
