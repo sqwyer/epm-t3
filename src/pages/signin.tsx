@@ -1,12 +1,8 @@
-import type { NextPage } from "next";
+import { getSession, signIn } from "next-auth/react";
 import Head from "next/head";
-// import { trpc } from "../utils/trpc";
-import { getSession, signIn, useSession } from "next-auth/react";
 import { Context } from "../server/router/context";
 
-const Home: NextPage = () => {
-	const { data: session, status } = useSession();
-
+export default function Signin() {
 	return (
 		<>
 			<Head>
@@ -15,28 +11,25 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div>
-				<p>
-					{session?.user
-						? "Welcome, " + session?.user?.name
-						: "Loading..."}
-				</p>
+				<h1>You are not signed in.</h1>
+				<button onClick={() => signIn("google")}>
+					Signin with Google
+				</button>
 			</div>
 		</>
 	);
-};
-
-export default Home;
+}
 
 export async function getServerSideProps(ctx: Context) {
 	const session = await getSession({ req: ctx.req });
-	console.log("from index: ", session);
-	if (!session?.user) {
+	if (session?.user) {
 		return {
 			redirect: {
-				destination: "/signin",
+				destination: "/",
 				permenant: false,
 			},
 		};
 	}
+
 	return { props: {} };
 }
