@@ -1,7 +1,7 @@
 // https://tailwindui.com/components/preview
 
 import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
+import { Menu, Popover, Transition } from "@headlessui/react";
 import {
 	BookmarkAltIcon,
 	MenuIcon,
@@ -10,6 +10,9 @@ import {
 	XIcon,
 } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
+import Image from "next/image";
+import { Session } from "next-auth";
+import { signIn } from "next-auth/react";
 
 const solutions = [
 	{
@@ -42,7 +45,7 @@ function classNames(...classes: any) {
 	return classes.filter(Boolean).join(" ");
 }
 
-export default function Nav() {
+export default function Nav({ session }: { session: Session | null }) {
 	return (
 		<Popover className="relative bg-white">
 			<div>
@@ -144,7 +147,7 @@ export default function Nav() {
 											open
 												? "text-gray-900"
 												: "text-gray-500",
-											"group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900"
+											"group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-"
 										)}
 									>
 										<span>More</span>
@@ -202,18 +205,96 @@ export default function Nav() {
 						</Popover>
 					</Popover.Group>
 					<div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-						<a
-							href="#"
-							className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-						>
-							Sign in
-						</a>
-						<a
-							href="#"
-							className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
-						>
-							Sign up
-						</a>
+						{session?.user ? (
+							<Menu as="div">
+								<Menu.Button className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+									<span className="sr-only">
+										Open user menu
+									</span>
+									<div className="w-8 h-8 rounded-full overflow-hidden">
+										<Image
+											height={32}
+											width={32}
+											src={session?.user?.image as string}
+											alt="User photo"
+										/>
+									</div>
+								</Menu.Button>
+								<Transition
+									as={Fragment}
+									enter="transition ease-out duration-100"
+									enterFrom="transform opacity-0 scale-95"
+									enterTo="transform opacity-100 scale-100"
+									leave="transition ease-in duration-75"
+									leaveFrom="transform opacity-100 scale-100"
+									leaveTo="transform opacity-0 scale-95"
+								>
+									<Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+										<div className="py-1">
+											<Menu.Item>
+												{() => {
+													return (
+														<div className="py-3 px-4">
+															<span className="block text-sm text-gray-900 dark:text-white">
+																{
+																	session
+																		?.user
+																		?.name
+																}
+															</span>
+															<span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
+																{
+																	session
+																		?.user
+																		?.email
+																}
+															</span>
+														</div>
+													);
+												}}
+											</Menu.Item>
+										</div>
+										<div className="py-1">
+											<Menu.Item>
+												{({ active }) => (
+													<a
+														href="#"
+														className={classNames(
+															active
+																? "bg-gray-100 text-gray-900"
+																: "text-gray-700",
+															"block px-4 py-2 text-sm"
+														)}
+													>
+														Dashboard
+													</a>
+												)}
+											</Menu.Item>
+										</div>
+									</Menu.Items>
+								</Transition>
+							</Menu>
+						) : (
+							<div>
+								<a
+									href="#"
+									className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+								>
+									Learn More
+								</a>
+								<a
+									href="#"
+									onClick={
+										session?.user
+											? undefined
+											: () => signIn("google")
+									}
+									className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+								>
+									Sign in
+								</a>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
@@ -287,19 +368,15 @@ export default function Nav() {
 							<div>
 								<a
 									href="#"
+									onClick={
+										session?.user
+											? undefined
+											: () => signIn("google")
+									}
 									className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
 								>
-									Sign up
+									Sign in
 								</a>
-								<p className="mt-6 text-center text-base font-medium text-gray-500">
-									Existing customer?{" "}
-									<a
-										href="#"
-										className="text-blue-600 hover:text-blue-500"
-									>
-										Sign in
-									</a>
-								</p>
 							</div>
 						</div>
 					</div>
