@@ -179,7 +179,7 @@ export default function Nav({
 												open
 													? "text-gray-900"
 													: "text-gray-500",
-												"group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-"
+												"group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none"
 											)}
 										>
 											<span>More</span>
