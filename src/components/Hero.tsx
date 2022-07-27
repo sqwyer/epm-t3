@@ -17,7 +17,7 @@ export default function Hero({ session }: any) {
 				</p>
 				<div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
 					<a
-						href="#"
+						href={session?.user ? "/dashboard" : undefined}
 						onClick={
 							session?.user ? undefined : () => signIn("google")
 						}

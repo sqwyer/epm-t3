@@ -1,11 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-// import { trpc } from "../utils/trpc";
-import { getSession, useSession } from "next-auth/react";
-import { Context } from "../server/router/context";
+import { useSession } from "next-auth/react";
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
-import { Session } from "next-auth";
 
 const Home: NextPage = ({ auth }: any) => {
 	console.log(auth);
@@ -14,7 +11,7 @@ const Home: NextPage = ({ auth }: any) => {
 	return (
 		<>
 			<Head>
-				<title>East Manager</title>
+				<title>Eastverse</title>
 				<meta name="title" content="EAST Manager" />
 				<meta
 					name="description"
@@ -23,15 +20,11 @@ const Home: NextPage = ({ auth }: any) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6">
-				{/* <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10"></div> */}
 				<Nav session={session} />
-				<div className="py-6">
+				<div className="py-6 divide-y-2 divide-gray-100">
 					<Hero session={session} />
-					{/* <p>
-						{session?.user
-							? "Welcome, " + session?.user?.name
-							: "Loading..."}
-					</p> */}
+					{/* <hr className="divide-gray-100"/> */}
+					<div></div>
 				</div>
 			</div>
 		</>
@@ -39,18 +32,3 @@ const Home: NextPage = ({ auth }: any) => {
 };
 
 export default Home;
-
-export async function getServerSideProps(ctx: Context) {
-	const session = await getSession({ req: ctx.req });
-	// console.log("from index: ", session);
-	// if (!session?.user) {
-	// 	return {
-	// 		redirect: {
-	// 			destination: "/signin",
-	// 			permenant: false,
-	// 		},
-	// 	};
-	// }
-	console.log("sess: ", session);
-	return { props: { auth: session ? true : false } };
-}
