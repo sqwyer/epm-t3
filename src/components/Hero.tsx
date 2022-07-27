@@ -24,7 +24,10 @@ export default function Hero({ session }: any) {
 							onClick={
 								session?.user
 									? undefined
-									: () => signIn("google")
+									: () =>
+											signIn("google", {
+												callbackUrl: `${window.location.origin}/dashboard`,
+											})
 							}
 						>
 							{session?.user ? "Dashboard" : "Sign in"}

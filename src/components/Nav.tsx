@@ -67,191 +67,201 @@ export default function Nav({
 					<div className="flex justify-start lg:w-0 lg:flex-1">
 						<Link href="/">
 							<div className="flex flex-col">
-								<span className="font-bold text-blue-600 text-lg">
+								<span className="font-bold text-blue-600 text-lg cursor-pointer">
 									Eastverse
 								</span>
 							</div>
 						</Link>
 					</div>
-					<div className="-mr-2 -my-2 md:hidden">
-						<Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
-							<span className="sr-only">Open menu</span>
-							<MenuIcon className="h-6 w-6" aria-hidden="true" />
-						</Popover.Button>
-					</div>
 					{dashboard && dashboard == true ? (
 						<div className="flex flex-row gap-6">
-							<Link href="/dashboard">
-								<span className="text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
-									Dashboard
-								</span>
-							</Link>
-							{/* <a
-							href="#"
-							className="text-base font-medium text-gray-500 hover:text-gray-900"
-						>
-							Project Manager
-						</a> */}
+							<div className="flex flex-row gap-6">
+								<Link href="/dashboard">
+									<span className="text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
+										Dashboard
+									</span>
+								</Link>
+							</div>
+							<div className="-mr-2 -my-2 md:hidden">
+								<Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+									<span className="sr-only">Open menu</span>
+									<MenuIcon
+										className="h-6 w-6"
+										aria-hidden="true"
+									/>
+								</Popover.Button>
+							</div>
 						</div>
 					) : (
-						<Popover.Group
-							as="nav"
-							className="hidden md:flex space-x-10"
-						>
-							<Popover className="relative">
-								{({ open }) => (
-									<>
-										<Popover.Button
-											className={classNames(
-												open
-													? "text-gray-900"
-													: "text-gray-500",
-												"group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none"
-											)}
-										>
-											<span>Solutions</span>
-											<ChevronDownIcon
+						<div>
+							<div className="-mr-2 -my-2 md:hidden">
+								<Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+									<span className="sr-only">Open menu</span>
+									<MenuIcon
+										className="h-6 w-6"
+										aria-hidden="true"
+									/>
+								</Popover.Button>
+							</div>
+							<Popover.Group
+								as="nav"
+								className="hidden md:flex space-x-10"
+							>
+								<Popover className="relative">
+									{({ open }) => (
+										<>
+											<Popover.Button
 												className={classNames(
 													open
-														? "text-gray-600"
-														: "text-gray-400",
-													"ml-2 h-5 w-5 group-hover:text-gray-500"
+														? "text-gray-900"
+														: "text-gray-500",
+													"group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none"
 												)}
-												aria-hidden="true"
-											/>
-										</Popover.Button>
+											>
+												<span>Solutions</span>
+												<ChevronDownIcon
+													className={classNames(
+														open
+															? "text-gray-600"
+															: "text-gray-400",
+														"ml-2 h-5 w-5 group-hover:text-gray-500"
+													)}
+													aria-hidden="true"
+												/>
+											</Popover.Button>
 
-										<Transition
-											as={Fragment}
-											enter="transition ease-out duration-200"
-											enterFrom="opacity-0 translate-y-1"
-											enterTo="opacity-100 translate-y-0"
-											leave="transition ease-in duration-150"
-											leaveFrom="opacity-100 translate-y-0"
-											leaveTo="opacity-0 translate-y-1"
-										>
-											<Popover.Panel className="absolute z-10 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
-												<div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-													<div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-														{solutions.map(
-															(item) => (
-																<Link
-																	href={
-																		item.href
-																	}
-																	key={
-																		item.name
-																	}
-																>
-																	<div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
-																		<item.icon
-																			className="flex-shrink-0 h-6 w-6 text-blue-600"
-																			aria-hidden="true"
-																		/>
-																		<div className="ml-4">
-																			<p className="text-base font-medium text-gray-900">
-																				{
-																					item.name
-																				}
-																			</p>
-																			<p className="mt-1 text-sm text-gray-500">
-																				{
-																					item.description
-																				}
-																			</p>
+											<Transition
+												as={Fragment}
+												enter="transition ease-out duration-200"
+												enterFrom="opacity-0 translate-y-1"
+												enterTo="opacity-100 translate-y-0"
+												leave="transition ease-in duration-150"
+												leaveFrom="opacity-100 translate-y-0"
+												leaveTo="opacity-0 translate-y-1"
+											>
+												<Popover.Panel className="absolute z-10 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
+													<div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+														<div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+															{solutions.map(
+																(item) => (
+																	<Link
+																		href={
+																			item.href
+																		}
+																		key={
+																			item.name
+																		}
+																	>
+																		<div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
+																			<item.icon
+																				className="flex-shrink-0 h-6 w-6 text-blue-600"
+																				aria-hidden="true"
+																			/>
+																			<div className="ml-4">
+																				<p className="text-base font-medium text-gray-900">
+																					{
+																						item.name
+																					}
+																				</p>
+																				<p className="mt-1 text-sm text-gray-500">
+																					{
+																						item.description
+																					}
+																				</p>
+																			</div>
 																		</div>
-																	</div>
-																</Link>
-															)
-														)}
+																	</Link>
+																)
+															)}
+														</div>
 													</div>
-												</div>
-											</Popover.Panel>
-										</Transition>
-									</>
-								)}
-							</Popover>
+												</Popover.Panel>
+											</Transition>
+										</>
+									)}
+								</Popover>
 
-							<Link href="#">
-								<span className="text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
-									Docs
-								</span>
-							</Link>
+								<Link href="#">
+									<span className="text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
+										Docs
+									</span>
+								</Link>
 
-							<Popover className="relative">
-								{({ open }) => (
-									<>
-										<Popover.Button
-											className={classNames(
-												open
-													? "text-gray-900"
-													: "text-gray-500",
-												"group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none"
-											)}
-										>
-											<span>More</span>
-											<ChevronDownIcon
+								<Popover className="relative">
+									{({ open }) => (
+										<>
+											<Popover.Button
 												className={classNames(
 													open
-														? "text-gray-600"
-														: "text-gray-400",
-													"ml-2 h-5 w-5 group-hover:text-gray-500"
+														? "text-gray-900"
+														: "text-gray-500",
+													"group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none"
 												)}
-												aria-hidden="true"
-											/>
-										</Popover.Button>
+											>
+												<span>More</span>
+												<ChevronDownIcon
+													className={classNames(
+														open
+															? "text-gray-600"
+															: "text-gray-400",
+														"ml-2 h-5 w-5 group-hover:text-gray-500"
+													)}
+													aria-hidden="true"
+												/>
+											</Popover.Button>
 
-										<Transition
-											as={Fragment}
-											enter="transition ease-out duration-200"
-											enterFrom="opacity-0 translate-y-1"
-											enterTo="opacity-100 translate-y-0"
-											leave="transition ease-in duration-150"
-											leaveFrom="opacity-100 translate-y-0"
-											leaveTo="opacity-0 translate-y-1"
-										>
-											<Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
-												<div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-													<div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-														{resources.map(
-															(item) => (
-																<Link
-																	href={
-																		item.href
-																	}
-																	key={
-																		item.name
-																	}
-																>
-																	<div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
-																		<item.icon
-																			className="flex-shrink-0 h-6 w-6 text-blue-600"
-																			aria-hidden="true"
-																		/>
-																		<div className="ml-4">
-																			<p className="text-base font-medium text-gray-900">
-																				{
-																					item.name
-																				}
-																			</p>
-																			<p className="mt-1 text-sm text-gray-500">
-																				{
-																					item.description
-																				}
-																			</p>
+											<Transition
+												as={Fragment}
+												enter="transition ease-out duration-200"
+												enterFrom="opacity-0 translate-y-1"
+												enterTo="opacity-100 translate-y-0"
+												leave="transition ease-in duration-150"
+												leaveFrom="opacity-100 translate-y-0"
+												leaveTo="opacity-0 translate-y-1"
+											>
+												<Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
+													<div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+														<div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+															{resources.map(
+																(item) => (
+																	<Link
+																		href={
+																			item.href
+																		}
+																		key={
+																			item.name
+																		}
+																	>
+																		<div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
+																			<item.icon
+																				className="flex-shrink-0 h-6 w-6 text-blue-600"
+																				aria-hidden="true"
+																			/>
+																			<div className="ml-4">
+																				<p className="text-base font-medium text-gray-900">
+																					{
+																						item.name
+																					}
+																				</p>
+																				<p className="mt-1 text-sm text-gray-500">
+																					{
+																						item.description
+																					}
+																				</p>
+																			</div>
 																		</div>
-																	</div>
-																</Link>
-															)
-														)}
+																	</Link>
+																)
+															)}
+														</div>
 													</div>
-												</div>
-											</Popover.Panel>
-										</Transition>
-									</>
-								)}
-							</Popover>
-						</Popover.Group>
+												</Popover.Panel>
+											</Transition>
+										</>
+									)}
+								</Popover>
+							</Popover.Group>
+						</div>
 					)}
 
 					<div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
@@ -362,7 +372,10 @@ export default function Nav({
 										onClick={
 											session?.user
 												? undefined
-												: () => signIn("google")
+												: () =>
+														signIn("google", {
+															callbackUrl: `${window.location.origin}/dashboard`,
+														})
 										}
 									>
 										Sign in
@@ -446,7 +459,11 @@ export default function Nav({
 									<Link href="#">
 										<span
 											className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 cursor-pointer"
-											onClick={() => signIn("google")}
+											onClick={() =>
+												signIn("google", {
+													callbackUrl: `${window.location.origin}/dashboard`,
+												})
+											}
 										>
 											Sign in
 										</span>

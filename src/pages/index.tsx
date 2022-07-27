@@ -79,18 +79,17 @@ function Section3() {
 	);
 }
 
-const Home: NextPage = ({ auth }: any) => {
-	console.log(auth);
+const Home: NextPage = () => {
 	const { data: session, status } = useSession();
 
 	return (
 		<>
 			<Head>
 				<title>Eastverse</title>
-				<meta name="title" content="EAST Manager" />
+				<meta name="title" content="Eastverse" />
 				<meta
 					name="description"
-					content="We're creating solutions that enable students to be more effective in EAST."
+					content="We're creating solutions that enable students, facilitators, and programs to better collaborate, innovate, and create."
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>

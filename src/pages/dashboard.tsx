@@ -21,11 +21,11 @@ const Page: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Eastverse - Dashboard</title>
-				<meta name="title" content="EAST Manager" />
+				<title>Eastverse</title>
+				<meta name="title" content="Eastverse - Dashboard" />
 				<meta
 					name="description"
-					content="We're creating solutions that enable students to be more effective in EAST."
+					content="We're creating solutions that enable students, facilitators, and programs to better collaborate, innovate, and create."
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
