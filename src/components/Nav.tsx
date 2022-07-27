@@ -257,7 +257,7 @@ export default function Nav({
 					<div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
 						{session?.user ? (
 							<Menu as="div">
-								<Menu.Button className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+								<Menu.Button className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-30">
 									<span className="sr-only">
 										Open user menu
 									</span>
@@ -285,14 +285,14 @@ export default function Nav({
 												{() => {
 													return (
 														<div className="py-3 px-4">
-															<span className="block text-sm text-gray-900 dark:text-white">
+															<span className="block text-sm text-gray-900">
 																{
 																	session
 																		?.user
 																		?.name
 																}
 															</span>
-															<span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
+															<span className="block text-sm font-medium text-gray-500 truncate">
 																{
 																	session
 																		?.user
