@@ -19,7 +19,7 @@ export default function Hero({ session }: any) {
 				<div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
 					<Link href={session?.user ? "/dashboard" : "#"}>
 						<div
-							className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+							className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 cursor-pointer"
 							onClick={
 								session?.user
 									? undefined
@@ -41,12 +41,11 @@ export default function Hero({ session }: any) {
 							</svg>
 						</div>
 					</Link>
-					<a
-						href="#"
-						className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-					>
-						Learn More
-					</a>
+					<Link href="#">
+						<span className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 cursor-pointer">
+							Learn More
+						</span>
+					</Link>
 				</div>
 			</div>
 		</section>
