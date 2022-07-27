@@ -9,7 +9,7 @@ import {
 	ViewGridIcon,
 	XIcon,
 } from "@heroicons/react/outline";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon, GlobeAltIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
@@ -17,11 +17,18 @@ import Link from "next/link";
 
 const solutions = [
 	{
-		name: "EAST Project Manager",
+		name: "EV Project Manager",
 		description:
 			"Develop and collaborate on EAST projects more effectively.",
 		href: "#",
 		icon: ViewGridIcon,
+	},
+	{
+		name: "EV Safari",
+		description:
+			"Discover and share projects that are open for public collaboration.",
+		href: "#",
+		icon: GlobeAltIcon,
 	},
 ];
 
@@ -54,7 +61,7 @@ export default function Nav({
 	dashboard?: boolean;
 }) {
 	return (
-		<Popover className="relative bg-white">
+		<Popover className="bg-white sticky top-0 z-50">
 			<div>
 				<div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
 					<div className="flex justify-start lg:w-0 lg:flex-1">
@@ -419,7 +426,6 @@ export default function Nav({
 									<span className="text-base font-medium text-gray-900 hover:text-gray-700">
 										Docs
 									</span>
-									=
 								</Link>
 								{resources.map((item) => (
 									<Link key={item.name} href={item.href}>

@@ -5,16 +5,17 @@ export default function Hero({ session }: any) {
 	return (
 		<section className="bg-hero-pattern dark:bg-gray-900 bg-cover">
 			<div className="py-8 px-10 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-				<h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-					Making EAST easier for{" "}
-					<span className="underline decoration-blue-600 decoration-8">
-						students
-					</span>
-					.
+				<h1 className="mb-4 text-2xl font-extrabold tracking-tight leading-10 text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+					Pushing{" "}
+					<span className="underline decoration-blue-600 decoration-4 md:decoration-8">
+						collaboration
+					</span>{" "}
+					in EAST.
 				</h1>
 				<p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-					We&apos;re creating solutions that enable students to be
-					more effective in EAST.
+					We&apos;re creating solutions that enable students,
+					facilitators, and programs to better collaborate, innovate,
+					and create.
 				</p>
 				<div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
 					<Link href={session?.user ? "/dashboard" : "#"}>
