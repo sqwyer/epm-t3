@@ -18,7 +18,7 @@ function Section1() {
 				<span className="rounded-full bg-blue-300 p-3 w-min text-white font-bold border-blue-100 border-8">
 					<ChatIcon className="h-6 w-6" />
 				</span>
-				<h1 className="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-4x">
+				<h1 className="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-4xl">
 					Manage projects at scale
 				</h1>
 				<p className="text-lg font-normal text-gray-500 lg:text-xl">
@@ -47,7 +47,7 @@ function Section2() {
 				<h1 className="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-4xl">
 					Increase your productivity
 				</h1>
-				<p className="text-lg font-normal text-gray-500 lg:text-x">
+				<p className="text-lg font-normal text-gray-500 lg:text-xl">
 					Eastverse empowers users to be more productive by making it
 					easier than ever to manage, document, and share projects.
 				</p>
