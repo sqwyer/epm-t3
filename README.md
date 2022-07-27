@@ -19,6 +19,7 @@ cd epm-t3
 **Running**
 
 ```
+npm install
 npm run dev
 ```
 
