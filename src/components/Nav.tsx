@@ -13,6 +13,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import Image from "next/image";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 
 const solutions = [
 	{
@@ -57,11 +58,13 @@ export default function Nav({
 			<div>
 				<div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
 					<div className="flex justify-start lg:w-0 lg:flex-1">
-						<a href="/" className="flex flex-col">
+						<Link href="/">
+							<div className="flex flex-col">
 							<span className="font-bold text-blue-600 text-lg">
 								Eastverse
 							</span>
-						</a>
+							</div>
+						</Link>
 					</div>
 					<div className="-mr-2 -my-2 md:hidden">
 						<Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
@@ -71,12 +74,11 @@ export default function Nav({
 					</div>
 					{dashboard && dashboard == true ? (
 						<div className="flex flex-row gap-6">
-							<a
+							<Link
 								href="/dashboard"
-								className="text-base font-medium text-gray-500 hover:text-gray-900"
 							>
-								Dashboard
-							</a>
+								<span className="text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">Dashboard</span>
+							</Link>
 							{/* <a
 							href="#"
 							className="text-base font-medium text-gray-500 hover:text-gray-900"
@@ -126,32 +128,32 @@ export default function Nav({
 													<div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
 														{solutions.map(
 															(item) => (
-																<a
-																	key={
-																		item.name
-																	}
+																<Link
 																	href={
 																		item.href
 																	}
-																	className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
 																>
-																	<item.icon
-																		className="flex-shrink-0 h-6 w-6 text-blue-600"
-																		aria-hidden="true"
-																	/>
-																	<div className="ml-4">
-																		<p className="text-base font-medium text-gray-900">
-																			{
-																				item.name
-																			}
-																		</p>
-																		<p className="mt-1 text-sm text-gray-500">
-																			{
-																				item.description
-																			}
-																		</p>
+																	<div key={
+																		item.name
+																	} className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
+																		<item.icon
+																			className="flex-shrink-0 h-6 w-6 text-blue-600"
+																			aria-hidden="true"
+																		/>
+																		<div className="ml-4">
+																			<p className="text-base font-medium text-gray-900">
+																				{
+																					item.name
+																				}
+																			</p>
+																			<p className="mt-1 text-sm text-gray-500">
+																				{
+																					item.description
+																				}
+																			</p>
+																		</div>
 																	</div>
-																</a>
+																</Link>
 															)
 														)}
 													</div>
@@ -162,12 +164,11 @@ export default function Nav({
 								)}
 							</Popover>
 
-							<a
+							<Link
 								href="#"
-								className="text-base font-medium text-gray-500 hover:text-gray-900"
 							>
-								Docs
-							</a>
+								<span className="text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">Docs</span>
+							</Link>
 
 							<Popover className="relative">
 								{({ open }) => (
@@ -206,15 +207,14 @@ export default function Nav({
 													<div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
 														{resources.map(
 															(item) => (
-																<a
-																	key={
-																		item.name
-																	}
+																<Link
 																	href={
 																		item.href
 																	}
-																	className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
 																>
+																	<div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer" key={
+																		item.name
+																	}>
 																	<item.icon
 																		className="flex-shrink-0 h-6 w-6 text-blue-600"
 																		aria-hidden="true"
@@ -231,7 +231,8 @@ export default function Nav({
 																			}
 																		</p>
 																	</div>
-																</a>
+																	</div>
+																</Link>
 															)
 														)}
 													</div>
@@ -297,35 +298,37 @@ export default function Nav({
 										<div className="py-1 divide-gray-100 divide-y">
 											<Menu.Item>
 												{({ active }) => (
-													<a
+													<Link
 														href="/dashboard"
-														className={classNames(
+													>
+														<span className={classNames(
 															active
 																? "bg-gray-100 text-gray-900"
 																: "text-gray-700",
-															"block px-4 py-2 text-sm"
-														)}
-													>
-														Dashboard
-													</a>
+															"block px-4 py-2 text-sm cursor-pointer"
+														)}>Dashboard</span>
+													</Link>
 												)}
 											</Menu.Item>
 											<Menu.Item>
 												{({ active }) => (
-													<a
+													<Link
 														href="#"
-														onClick={() =>
+														// onClick={() =>
+														// 	signOut()
+														// }
+													>
+														<span onClick={() =>
 															signOut()
-														}
-														className={classNames(
+														} className={classNames(
 															active
 																? "bg-gray-100 text-gray-900"
 																: "text-gray-700",
-															"block px-4 py-2 text-sm"
-														)}
-													>
-														Sign out
-													</a>
+															"block px-4 py-2 text-sm cursor-pointer"
+														)}>
+															Sign out
+														</span>
+													</Link>
 												)}
 											</Menu.Item>
 										</div>
@@ -334,23 +337,20 @@ export default function Nav({
 							</Menu>
 						) : (
 							<div>
-								<a
+								<Link
 									href="#"
-									className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
 								>
-									Learn More
-								</a>
-								<a
+									<span className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">Learn More</span>
+								</Link>
+								<Link
 									href="#"
-									onClick={
+								>
+									<span className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 cursor-pointer" onClick={
 										session?.user
 											? undefined
 											: () => signIn("google")
-									}
-									className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
-								>
-									Sign in
-								</a>
+									}>Sign in</span>
+								</Link>
 							</div>
 						)}
 					</div>
@@ -427,18 +427,15 @@ export default function Nav({
 								{session?.user ? (
 									<a
 										href="/dashboard"
-										className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
 									>
-										Dashboard
+										<span className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Dashboard</span>
 									</a>
 								) : (
-									<a
+									<Link
 										href="#"
-										onClick={() => signIn("google")}
-										className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
 									>
-										Sign in
-									</a>
+										<span className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 cursor-pointer" onClick={() => signIn("google")}>Sign in</span>
+									</Link>
 								)}
 							</div>
 						</div>
