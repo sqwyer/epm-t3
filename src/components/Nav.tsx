@@ -132,13 +132,11 @@ export default function Nav({
 																	href={
 																		item.href
 																	}
+																	key={
+																		item.name
+																	}
 																>
-																	<div
-																		key={
-																			item.name
-																		}
-																		className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer"
-																	>
+																	<div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
 																		<item.icon
 																			className="flex-shrink-0 h-6 w-6 text-blue-600"
 																			aria-hidden="true"
@@ -214,13 +212,11 @@ export default function Nav({
 																	href={
 																		item.href
 																	}
+																	key={
+																		item.name
+																	}
 																>
-																	<div
-																		className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer"
-																		key={
-																			item.name
-																		}
-																	>
+																	<div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer">
 																		<item.icon
 																			className="flex-shrink-0 h-6 w-6 text-blue-600"
 																			aria-hidden="true"
@@ -402,48 +398,44 @@ export default function Nav({
 							<div className="mt-6">
 								<nav className="grid gap-y-8">
 									{solutions.map((item) => (
-										<a
-											key={item.name}
-											href={item.href}
-											className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
-										>
-											<item.icon
-												className="flex-shrink-0 h-6 w-6 text-blue-600"
-												aria-hidden="true"
-											/>
-											<span className="ml-3 text-base font-medium text-gray-900">
-												{item.name}
-											</span>
-										</a>
+										<Link key={item.name} href={item.href}>
+											<div className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50 cursor-pointer">
+												<item.icon
+													className="flex-shrink-0 h-6 w-6 text-blue-600"
+													aria-hidden="true"
+												/>
+												<span className="ml-3 text-base font-medium text-gray-900">
+													{item.name}
+												</span>
+											</div>
+										</Link>
 									))}
 								</nav>
 							</div>
 						</div>
 						<div className="py-6 px-5 space-y-6">
 							<div className="grid grid-cols-2 gap-y-4 gap-x-8">
-								<a
-									href="#"
-									className="text-base font-medium text-gray-900 hover:text-gray-700"
-								>
-									Docs
-								</a>
+								<Link href="#">
+									<span className="text-base font-medium text-gray-900 hover:text-gray-700">
+										Docs
+									</span>
+									=
+								</Link>
 								{resources.map((item) => (
-									<a
-										key={item.name}
-										href={item.href}
-										className="text-base font-medium text-gray-900 hover:text-gray-700"
-									>
-										{item.name}
-									</a>
+									<Link key={item.name} href={item.href}>
+										<span className="text-base font-medium text-gray-900 hover:text-gray-700">
+											{item.name}
+										</span>
+									</Link>
 								))}
 							</div>
 							<div>
 								{session?.user ? (
-									<a href="/dashboard">
-										<span className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">
+									<Link href="/dashboard">
+										<span className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 cursor-pointer">
 											Dashboard
 										</span>
-									</a>
+									</Link>
 								) : (
 									<Link href="#">
 										<span
