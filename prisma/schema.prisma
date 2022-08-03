@@ -37,23 +37,19 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Role {
-  id             String          @id @default(cuid()) @map("_id")
-  label          String
-  permissions    String[]
-  projectMembers ProjectMember[]
-  project        Project?        @relation(fields: [projectId], references: [id])
-  projectId      String?
+enum Role {
+  OWNER
+  MANAGER
+  MEMBER
+  VISITOR
 }
 
 model ProjectMember {
   id        String   @id @default(cuid()) @map("_id")
-  user      User?    @relation(fields: [userId], references: [id])
-  userId    String?
+  userId    String
   project   Project? @relation(fields: [projectId], references: [id])
   projectId String?
-  role      Role?    @relation(fields: [roleId], references: [id])
-  roleId    String?
+  role      Role
 }
 
 model Project {
@@ -62,18 +58,17 @@ model Project {
   description    String?
   owner          String
   projectMembers ProjectMember[]
-  roles          Role[]
 }
 
 model User {
-  id             String          @id @default(cuid()) @map("_id")
-  name           String?
-  email          String?         @unique
-  emailVerified  DateTime?
-  image          String?
-  accounts       Account[]
-  sessions       Session[]
-  projectMembers ProjectMember[]
+  id            String    @id @default(cuid()) @map("_id")
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  projects      String[]
 }
 
 model VerificationToken {

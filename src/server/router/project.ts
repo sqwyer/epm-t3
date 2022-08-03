@@ -17,20 +17,10 @@ const projectRouter = createProtectedRouter().query("create", {
 					create: [
 						{
 							userId: ctx.session.user.id as string,
-							roleId: {}, // THIS NEEDS TO SOMEHOW BE THE ROLE CREATED's ID??
-						},
-					], // |
-				}, // |
-				roles: {
-					// V
-					create: [
-						{
-							// THIS ONE
-							label: "Manager",
-							permissions: ["*"],
+							role: "OWNER"
 						},
 					],
-				},
+				}
 			},
 		});
 
@@ -39,15 +29,17 @@ const projectRouter = createProtectedRouter().query("create", {
 				id: ctx.session.user.id as string,
 			},
 			select: {
-				projectMembers: true,
+				projects: true,
 				id: true,
 			},
 		});
 
-		if (user?.projectMembers) {
+		if (user?.projects) {
 			await ctx.prisma.user.update({
 				where: { id: user.id },
-				data: {},
+				data: {
+					projects: [Project.id, ...user.projects]
+				},
 			});
 
 			ctx.res?.json({
