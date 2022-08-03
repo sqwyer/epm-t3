@@ -1,6 +1,5 @@
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { Url } from "url";
 import Spinner from "./Spinner";
 
 export default function Hero({ session, status }: any) {
