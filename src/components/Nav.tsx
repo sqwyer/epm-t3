@@ -14,6 +14,7 @@ import Image from "next/image";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import Spinner from "./Spinner";
 
 const solutions = [
 	{
@@ -56,9 +57,11 @@ function classNames(...classes: any) {
 export default function Nav({
 	session,
 	dashboard,
+	status,
 }: {
 	session: Session | null;
 	dashboard?: boolean;
+	status: "authenticated" | "loading" | "unauthenticated";
 }) {
 	return (
 		<Popover className="bg-white sticky top-0 z-50">
@@ -265,124 +268,136 @@ export default function Nav({
 					)}
 
 					<div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-						{session?.user ? (
-							<Menu as="div">
-								<Menu.Button className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-30">
-									<span className="sr-only">
-										Open user menu
-									</span>
-									<div className="w-8 h-8 rounded-full overflow-hidden">
-										<Image
-											height={32}
-											width={32}
-											src={session?.user?.image as string}
-											alt="User photo"
-										/>
+						{(() => {
+							if (status == "loading") return <Spinner />;
+							else if (status == "unauthenticated")
+								return (
+									<div>
+										<Link href="#">
+											<span className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
+												Learn More
+											</span>
+										</Link>
+										<Link href="#">
+											<span
+												className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 cursor-pointer"
+												onClick={
+													session?.user
+														? undefined
+														: () =>
+																signIn(
+																	"google",
+																	{
+																		callbackUrl: `${window.location.origin}/dashboard`,
+																	}
+																)
+												}
+											>
+												Sign in
+											</span>
+										</Link>
 									</div>
-								</Menu.Button>
-								<Transition
-									as={Fragment}
-									enter="transition ease-out duration-100"
-									enterFrom="transform opacity-0 scale-95"
-									enterTo="transform opacity-100 scale-100"
-									leave="transition ease-in duration-75"
-									leaveFrom="transform opacity-100 scale-100"
-									leaveTo="transform opacity-0 scale-95"
-								>
-									<Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
-										<div className="py-1">
-											<Menu.Item>
-												{() => {
-													return (
-														<div className="py-3 px-4">
-															<span className="block text-sm text-gray-900">
-																{
-																	session
-																		?.user
-																		?.name
-																}
-															</span>
-															<span className="block text-sm font-medium text-gray-500 truncate">
-																{
-																	session
-																		?.user
-																		?.email
-																}
-															</span>
-														</div>
-													);
-												}}
-											</Menu.Item>
-										</div>
-										<div className="py-1 divide-gray-100 divide-y">
-											<Menu.Item>
-												{({ active }) => (
-													<Link href="/dashboard">
-														<span
-															className={classNames(
-																active
-																	? "bg-gray-100 text-gray-900"
-																	: "text-gray-700",
-																"block px-4 py-2 text-sm cursor-pointer"
-															)}
-														>
-															Dashboard
-														</span>
-													</Link>
-												)}
-											</Menu.Item>
-											<Menu.Item>
-												{({ active }) => (
-													<Link
-														href="#"
-														// onClick={() =>
-														// 	signOut()
-														// }
-													>
-														<span
-															onClick={() =>
-																signOut()
-															}
-															className={classNames(
-																active
-																	? "bg-gray-100 text-gray-900"
-																	: "text-gray-700",
-																"block px-4 py-2 text-sm cursor-pointer"
-															)}
-														>
-															Sign out
-														</span>
-													</Link>
-												)}
-											</Menu.Item>
-										</div>
-									</Menu.Items>
-								</Transition>
-							</Menu>
-						) : (
-							<div>
-								<Link href="#">
-									<span className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
-										Learn More
-									</span>
-								</Link>
-								<Link href="#">
-									<span
-										className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 cursor-pointer"
-										onClick={
-											session?.user
-												? undefined
-												: () =>
-														signIn("google", {
-															callbackUrl: `${window.location.origin}/dashboard`,
-														})
-										}
-									>
-										Sign in
-									</span>
-								</Link>
-							</div>
-						)}
+								);
+							else
+								return (
+									<Menu as="div">
+										<Menu.Button className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-30">
+											<span className="sr-only">
+												Open user menu
+											</span>
+											<div className="w-8 h-8 rounded-full overflow-hidden">
+												<Image
+													height={32}
+													width={32}
+													src={
+														session?.user
+															?.image as string
+													}
+													alt="User photo"
+												/>
+											</div>
+										</Menu.Button>
+										<Transition
+											as={Fragment}
+											enter="transition ease-out duration-100"
+											enterFrom="transform opacity-0 scale-95"
+											enterTo="transform opacity-100 scale-100"
+											leave="transition ease-in duration-75"
+											leaveFrom="transform opacity-100 scale-100"
+											leaveTo="transform opacity-0 scale-95"
+										>
+											<Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+												<div className="py-1">
+													<Menu.Item>
+														{() => {
+															return (
+																<div className="py-3 px-4">
+																	<span className="block text-sm text-gray-900">
+																		{
+																			session
+																				?.user
+																				?.name
+																		}
+																	</span>
+																	<span className="block text-sm font-medium text-gray-500 truncate">
+																		{
+																			session
+																				?.user
+																				?.email
+																		}
+																	</span>
+																</div>
+															);
+														}}
+													</Menu.Item>
+												</div>
+												<div className="py-1 divide-gray-100 divide-y">
+													<Menu.Item>
+														{({ active }) => (
+															<Link href="/dashboard">
+																<span
+																	className={classNames(
+																		active
+																			? "bg-gray-100 text-gray-900"
+																			: "text-gray-700",
+																		"block px-4 py-2 text-sm cursor-pointer"
+																	)}
+																>
+																	Dashboard
+																</span>
+															</Link>
+														)}
+													</Menu.Item>
+													<Menu.Item>
+														{({ active }) => (
+															<Link
+																href="#"
+																// onClick={() =>
+																// 	signOut()
+																// }
+															>
+																<span
+																	onClick={() =>
+																		signOut()
+																	}
+																	className={classNames(
+																		active
+																			? "bg-gray-100 text-gray-900"
+																			: "text-gray-700",
+																		"block px-4 py-2 text-sm cursor-pointer"
+																	)}
+																>
+																	Sign out
+																</span>
+															</Link>
+														)}
+													</Menu.Item>
+												</div>
+											</Menu.Items>
+										</Transition>
+									</Menu>
+								);
+						})()}
 					</div>
 				</div>
 			</div>
