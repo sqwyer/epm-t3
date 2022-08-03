@@ -17,10 +17,10 @@ const projectRouter = createProtectedRouter().query("create", {
 					create: [
 						{
 							userId: ctx.session.user.id as string,
-							role: "OWNER"
+							role: "OWNER",
 						},
 					],
-				}
+				},
 			},
 		});
 
@@ -38,7 +38,7 @@ const projectRouter = createProtectedRouter().query("create", {
 			await ctx.prisma.user.update({
 				where: { id: user.id },
 				data: {
-					projects: [Project.id, ...user.projects]
+					projects: [Project.id, ...user.projects],
 				},
 			});
 
