@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { getSession, useSession } from "next-auth/react";
-import Nav from "../components/Nav";
-import { Context } from "../server/router/context";
+import Nav from "../../components/Nav";
+import { Context } from "../../server/router/context";
 import { Session } from "next-auth";
 
 function Dashboard({ session }: { session: Session | null }) {
@@ -30,7 +30,7 @@ const Page: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6">
-				<Nav status={status} session={session} dashboard={true} />
+				<Nav session={session} status={status} dashboard={true} />
 				<Dashboard session={session} />
 			</div>
 		</>
