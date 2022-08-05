@@ -68,7 +68,13 @@ export default function Nav({
 			<div>
 				<div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
 					<div className="flex justify-start lg:w-0 lg:flex-1">
-						<Link href="/">
+						<Link
+							href={
+								dashboard && dashboard == true
+									? "/dashboard"
+									: "/"
+							}
+						>
 							<div className="flex flex-col">
 								<span className="font-bold text-blue-600 text-lg cursor-pointer">
 									Eastverse
@@ -78,13 +84,13 @@ export default function Nav({
 					</div>
 					{dashboard && dashboard == true ? (
 						<div className="flex flex-row gap-6">
-							<div className="flex flex-row gap-6">
+							{/* <div className="flex flex-row gap-6">
 								<Link href="/dashboard">
 									<span className="text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
 										Dashboard
 									</span>
 								</Link>
-							</div>
+							</div> */}
 							<div className="-mr-2 -my-2 md:hidden">
 								<Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
 									<span className="sr-only">Open menu</span>
@@ -300,102 +306,120 @@ export default function Nav({
 								);
 							else
 								return (
-									<Menu as="div">
-										<Menu.Button className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-30">
-											<span className="sr-only">
-												Open user menu
-											</span>
-											<div className="w-8 h-8 rounded-full overflow-hidden">
-												<Image
-													height={32}
-													width={32}
-													src={
-														session?.user
-															?.image as string
-													}
-													alt="User photo"
+									<div className="flex flex-row gap-6">
+										<div className="text-xl font-bold text-gray-500 hover:text-gray-900 cursor-pointer">
+											{/* aria-hidden="true" */}
+
+											<Link href="/dashboard/new">+</Link>
+										</div>
+										<div className="text-xl font-bold text-gray-500 hover:text-gray-900 cursor-pointer">
+											{/* aria-hidden="true" */}
+											<Link href="/dashboard/new">
+												<GlobeAltIcon
+													className={classNames(
+														"text-xl font-bold text-gray-500 hover:text-gray-900 cursor-pointer"
+													)}
+													aria-hidden="true"
 												/>
-											</div>
-										</Menu.Button>
-										<Transition
-											as={Fragment}
-											enter="transition ease-out duration-100"
-											enterFrom="transform opacity-0 scale-95"
-											enterTo="transform opacity-100 scale-100"
-											leave="transition ease-in duration-75"
-											leaveFrom="transform opacity-100 scale-100"
-											leaveTo="transform opacity-0 scale-95"
-										>
-											<Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
-												<div className="py-1">
-													<Menu.Item>
-														{() => {
-															return (
-																<div className="py-3 px-4">
-																	<span className="block text-sm text-gray-900">
-																		{
-																			session
-																				?.user
-																				?.name
-																		}
-																	</span>
-																	<span className="block text-sm font-medium text-gray-500 truncate">
-																		{
-																			session
-																				?.user
-																				?.email
-																		}
-																	</span>
-																</div>
-															);
-														}}
-													</Menu.Item>
+											</Link>
+										</div>
+										<Menu as="div">
+											<Menu.Button className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-30">
+												<span className="sr-only">
+													Open user menu
+												</span>
+												<div className="w-8 h-8 rounded-full overflow-hidden">
+													<Image
+														height={32}
+														width={32}
+														src={
+															session?.user
+																?.image as string
+														}
+														alt="User photo"
+													/>
 												</div>
-												<div className="py-1 divide-gray-100 divide-y">
-													<Menu.Item>
-														{({ active }) => (
-															<Link href="/dashboard">
-																<span
-																	className={classNames(
-																		active
-																			? "bg-gray-100 text-gray-900"
-																			: "text-gray-700",
-																		"block px-4 py-2 text-sm cursor-pointer"
-																	)}
+											</Menu.Button>
+											<Transition
+												as={Fragment}
+												enter="transition ease-out duration-100"
+												enterFrom="transform opacity-0 scale-95"
+												enterTo="transform opacity-100 scale-100"
+												leave="transition ease-in duration-75"
+												leaveFrom="transform opacity-100 scale-100"
+												leaveTo="transform opacity-0 scale-95"
+											>
+												<Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
+													<div className="py-1">
+														<Menu.Item>
+															{() => {
+																return (
+																	<div className="py-3 px-4">
+																		<span className="block text-sm text-gray-900">
+																			{
+																				session
+																					?.user
+																					?.name
+																			}
+																		</span>
+																		<span className="block text-sm font-medium text-gray-500 truncate">
+																			{
+																				session
+																					?.user
+																					?.email
+																			}
+																		</span>
+																	</div>
+																);
+															}}
+														</Menu.Item>
+													</div>
+													<div className="py-1 divide-gray-100 divide-y">
+														<Menu.Item>
+															{({ active }) => (
+																<Link href="/dashboard">
+																	<span
+																		className={classNames(
+																			active
+																				? "bg-gray-100 text-gray-900"
+																				: "text-gray-700",
+																			"block px-4 py-2 text-sm cursor-pointer"
+																		)}
+																	>
+																		Dashboard
+																	</span>
+																</Link>
+															)}
+														</Menu.Item>
+														<Menu.Item>
+															{({ active }) => (
+																<Link
+																	href="#"
+																	// onClick={() =>
+																	// 	signOut()
+																	// }
 																>
-																	Dashboard
-																</span>
-															</Link>
-														)}
-													</Menu.Item>
-													<Menu.Item>
-														{({ active }) => (
-															<Link
-																href="#"
-																// onClick={() =>
-																// 	signOut()
-																// }
-															>
-																<span
-																	onClick={() =>
-																		signOut()
-																	}
-																	className={classNames(
-																		active
-																			? "bg-gray-100 text-gray-900"
-																			: "text-gray-700",
-																		"block px-4 py-2 text-sm cursor-pointer"
-																	)}
-																>
-																	Sign out
-																</span>
-															</Link>
-														)}
-													</Menu.Item>
-												</div>
-											</Menu.Items>
-										</Transition>
-									</Menu>
+																	<span
+																		onClick={() =>
+																			signOut()
+																		}
+																		className={classNames(
+																			active
+																				? "bg-gray-100 text-gray-900"
+																				: "text-gray-700",
+																			"block px-4 py-2 text-sm cursor-pointer"
+																		)}
+																	>
+																		Sign out
+																	</span>
+																</Link>
+															)}
+														</Menu.Item>
+													</div>
+												</Menu.Items>
+											</Transition>
+										</Menu>
+									</div>
 								);
 						})()}
 					</div>
